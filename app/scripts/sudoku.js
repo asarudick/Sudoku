@@ -189,12 +189,8 @@
 		}
 
 		return columnCells;
+
 	}
-
-
-
-
-
 
 
 	/**
@@ -213,6 +209,22 @@
 
 
 
+
+
+
+	/**
+	* 			Exposed private methods for testing purposes.
+	* 			TODO: Delete after testing.
+	*/
+
+	Sudoku.prototype.testExports = {
+		'getRow' : getRow,
+		'getColumn' : getColumn,
+		'getBox' : getBox,
+		'isSolved' : isSolved,
+		'isValidBoard': isValidBoard,
+		'initializeBoard' : initializeBoard
+	};
 
 
 
