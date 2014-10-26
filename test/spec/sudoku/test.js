@@ -55,9 +55,21 @@
 					return expect( box.map(function(a){ return a.answer;}) ).to.eql([1, 2, 3, 7, 8, 9, 4, 5, 6]);
 				} );
 			} );
+
+			describe( 'isValidBoard', function () {
+				it( 'should be valid', function () {
+					return expect( sudoku.testExports.isValidBoard() ).to.equal(true);
+				} );
+			} );
+
+			describe( 'isSolved', function () {
+				it( 'should not be solved', function () {
+					return expect( sudoku.testExports.isSolved() ).to.equal(false);
+				} );
+			} );
 		}
 
-		describe( 'setCell', function () {
+		describe( 'setCell/getCell', function () {
 			it( 'should set the cell at row 5, column 5 to 6', function () {
 				sudoku.setCell( 5, 5, 6 );
 

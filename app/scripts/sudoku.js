@@ -7,7 +7,7 @@
 	// We need EventEmitter to raise events. We'll use very basic dependency management here,
 	// since requireJS, AMD, etc are a tad more involved and time is limited.
 	if ( typeof exports.EventEmitter === 'undefined' ) {
-		console.error( 'Sudoku: Dependency EventEmitter not found.' );
+		throw Error( 'Sudoku: Dependency EventEmitter not found.' );
 		return;
 	}
 
@@ -50,7 +50,7 @@
 
 		// TODO: Support varying board sizes.
 		if ( typeof answerBoard !== 'string' || answerBoard.length !== boardSize * boardSize ) {
-			console.error( 'Board size incorrect: Expected ' + boardSize + 'x' +
+			throw Error( 'Board size incorrect: Expected ' + boardSize + 'x' +
 				boardSize + ', but instead got ' + answerBoard.length );
 			return;
 		}
@@ -63,7 +63,7 @@
 
 		revealedBoard = revealedBoard.split( '' )
 			.map( function ( a ) {
-				return parseInt(a,10);
+				return (/[1-9]+/.test(a) === true) ? parseInt(a,10) : a;
 			} );
 
 		// Place into cells.
@@ -81,7 +81,7 @@
 		// Do some sanity checks.
 		if( isValidBoard( ) !== true )
 		{
-			console.error('Supplied board is invalid.');
+			throw Error('Supplied board is invalid.');
 			return;
 		}
 	}
@@ -110,11 +110,12 @@
 
 		var groups = getCellGroups();
 
-		// Could use for loops for performance gains here, but for the sake of readability,
-		// we'll use built-in forEach methods.
-		groups.forEach(function(group){
 
-			group.forEach(function(cell){
+		for (var group = 0; group < groups.length; group++) {
+			for (var cell = 0; cell < groups[group].length; cell++) {
+
+					// For readability.
+					var cell = groups[group][cell];
 
 					// Not necessary to use a hashtable here, since we have the indexes already.
 					var usedNumbers = [];
@@ -128,8 +129,8 @@
 
 					// Mark the number as used.
 					usedNumbers[ cell.answer ] = true;
-			});
-		});
+			}
+		}
 
 		return true;
 	}
@@ -138,26 +139,18 @@
 
 		var groups = getCellGroups();
 
-		// Could use for loops for performance gains here, but for the sake of readability,
-		// we'll use built-in forEach methods.
-		groups.forEach(function(group){
 
-			group.forEach(function(cell){
+		for (var group = 0; group < groups.length; group++) {
+			for (var cell = 0; cell < groups[group].length; cell++) {
 
-					// Not necessary to use a hashtable here, since we have the indexes already.
-					var usedNumbers = [];
-
-					// At this point, the board should already be valid, so
-					// we just need to check to see if the input is the same as the answer.
-					if ( cell.value !== cell.answer )
-					{
-						return false;
-					}
-
-					// Mark the number as used.
-					usedNumbers[ cell.value ] = true;
-			});
-		});
+				// At this point, the board should already be valid, so
+				// we just need to check to see if the input is the same as the answer.
+				if ( groups[group][cell].value !== groups[group][cell].answer )
+				{
+					return false;
+				}
+			}
+		}
 
 		return true;
 	}
@@ -222,8 +215,7 @@
 		'getColumn' : getColumn,
 		'getBox' : getBox,
 		'isSolved' : isSolved,
-		'isValidBoard': isValidBoard,
-		'initializeBoard' : initializeBoard
+		'isValidBoard': isValidBoard
 	};
 
 
