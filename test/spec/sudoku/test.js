@@ -67,6 +67,73 @@
 					return expect( sudoku.testExports.isSolved() ).to.equal(false);
 				} );
 			} );
+
+			describe( 'isSolved', function () {
+				it( 'should be solved', function () {
+
+					// So we don't evaluate getBoardSize() everytime.
+					var boardSize = sudoku.getBoardSize();
+
+					for (var i = 0; i < boardSize; i++) {
+						for (var j = 0; j < boardSize; j++) {
+							sudoku.setCell(i,j, sudoku.testExports.cells[i][j].answer )
+						}
+					}
+					return expect( sudoku.testExports.isSolved() ).to.equal(true);
+				} );
+			} );
+
+			describe( 'Event: cellchanged', function () {
+				it( 'should trigger \'cellchanged\' event', function () {
+
+					var triggered = false;
+
+					sudoku.on('cellchanged', function(args){triggered=true;});
+
+					sudoku.setCell(0,0,2);
+
+					return expect( triggered ).to.equal(true);
+				} );
+			} );
+
+			describe( 'Event: cellchanged', function () {
+				it( 'should not trigger \'cellchanged\' event', function () {
+
+					var triggered = false;
+
+					sudoku.on('cellchanged', function(args){triggered=true;});
+
+					sudoku.setCell(0,0,2);
+
+					return expect( triggered ).to.equal(false);
+				} );
+			} );
+
+			describe( 'Event: solved', function () {
+				it( 'should trigger \'solved\' event', function () {
+
+					var triggered = false;
+
+					sudoku.on('solved', function(args){triggered=true;});
+
+					sudoku.setCell(0,0,1);
+
+					return expect( triggered ).to.equal(true);
+				} );
+			} );
+
+			describe( 'Event: solved', function () {
+				it( 'should not trigger \'solved\' event', function () {
+
+					var triggered = false;
+
+					sudoku.on('solved', function(args){triggered=true;});
+
+					sudoku.setCell(0,0,2);
+
+					return expect( triggered ).to.equal(false);
+				} );
+			} );
 		}
 
 		describe( 'setCell/getCell', function () {

@@ -49,7 +49,8 @@
 	function initializeBoard( answerBoard, revealedBoard ) {
 
 		// TODO: Support varying board sizes.
-		if ( typeof answerBoard !== 'string' || answerBoard.length !== boardSize * boardSize ) {
+		if ( typeof answerBoard !== 'string' || answerBoard.length !== boardSize *
+			boardSize ) {
 			throw Error( 'Board size incorrect: Expected ' + boardSize + 'x' +
 				boardSize + ', but instead got ' + answerBoard.length );
 			return;
@@ -58,12 +59,12 @@
 		// Convert strings to an array of ints.
 		answerBoard = answerBoard.split( '' )
 			.map( function ( a ) {
-				return parseInt(a,10);
+				return parseInt( a, 10 );
 			} );
 
 		revealedBoard = revealedBoard.split( '' )
 			.map( function ( a ) {
-				return (/[1-9]+/.test(a) === true) ? parseInt(a,10) : a;
+				return ( /[1-9]+/.test( a ) === true ) ? parseInt( a, 10 ) : a;
 			} );
 
 		// Place into cells.
@@ -79,17 +80,15 @@
 
 		// It's possible that the board supplied has some errors.
 		// Do some sanity checks.
-		if( isValidBoard( ) !== true )
-		{
-			throw Error('Supplied board is invalid.');
+		if ( isValidBoard() !== true ) {
+			throw Error( 'Supplied board is invalid.' );
 			return;
 		}
 	}
 
 	// Validating and verifying the solution is simpler if box, row, and column
 	// arrays are flattened and grouped.
-	function getCellGroups()
-	{
+	function getCellGroups() {
 		var groups = [];
 
 		for ( var row = 0; row < cells.length; row++ ) {
@@ -106,47 +105,47 @@
 
 		return groups;
 	}
-	function isValidBoard(  ) {
+
+	function isValidBoard() {
 
 		var groups = getCellGroups();
 
 
-		for (var group = 0; group < groups.length; group++) {
-			for (var cell = 0; cell < groups[group].length; cell++) {
+		for ( var group = 0; group < groups.length; group++ ) {
+			for ( var cell = 0; cell < groups[ group ].length; cell++ ) {
 
-					// For readability.
-					var cell = groups[group][cell];
+				// For readability.
+				var cell = groups[ group ][ cell ];
 
-					// Not necessary to use a hashtable here, since we have the indexes already.
-					var usedNumbers = [];
+				// Not necessary to use a hashtable here, since we have the indexes already.
+				var usedNumbers = [];
 
-					// If the cell is empty, or not an acceptable number, or the number already appeared,
-					// then the board is not valid.
-					if ( cell.answer === null || /[1-9]+/.test( cell.answer ) === false || typeof usedNumbers[ cell.answer ] !== 'undefined' )
-					{
-						return false;
-					}
+				// If the cell is empty, or not an acceptable number, or the number already appeared,
+				// then the board is not valid.
+				if ( cell.answer === null || /[1-9]+/.test( cell.answer ) === false ||
+					typeof usedNumbers[ cell.answer ] !== 'undefined' ) {
+					return false;
+				}
 
-					// Mark the number as used.
-					usedNumbers[ cell.answer ] = true;
+				// Mark the number as used.
+				usedNumbers[ cell.answer ] = true;
 			}
 		}
 
 		return true;
 	}
 
-	function isSolved(  ) {
+	function isSolved() {
 
 		var groups = getCellGroups();
 
 
-		for (var group = 0; group < groups.length; group++) {
-			for (var cell = 0; cell < groups[group].length; cell++) {
+		for ( var group = 0; group < groups.length; group++ ) {
+			for ( var cell = 0; cell < groups[ group ].length; cell++ ) {
 
 				// At this point, the board should already be valid, so
 				// we just need to check to see if the input is the same as the answer.
-				if ( groups[group][cell].value !== groups[group][cell].answer )
-				{
+				if ( groups[ group ][ cell ].value !== groups[ group ][ cell ].answer ) {
 					return false;
 				}
 			}
@@ -158,13 +157,14 @@
 	function getBox( box ) {
 		var boxCells = [];
 
-		var boxRowStart = Math.floor(box / boxesPerRow) * boxHeight;
-		var boxColumnStart = Math.floor(box % boxesPerColumn);
+		var boxRowStart = Math.floor( box / boxesPerRow ) * boxHeight;
+		var boxColumnStart = Math.floor( box % boxesPerColumn );
 
 		// Iterate over every row in the box.
 		for ( var row = boxRowStart; row < boxRowStart + boxHeight; row++ ) {
 			// Select the columns on this row.
-			boxCells = boxCells.concat( cells[ row ].slice( boxColumnStart, boxColumnStart + boxWidth ) );
+			boxCells = boxCells.concat( cells[ row ].slice( boxColumnStart,
+				boxColumnStart + boxWidth ) );
 		}
 
 		return boxCells;
@@ -206,16 +206,17 @@
 
 
 	/**
-	* 			Exposed private methods for testing purposes.
-	* 			TODO: Delete after testing.
-	*/
+	 * 			Exposed private methods/members for testing purposes.
+	 * 			TODO: Delete after testing.
+	 */
 
 	Sudoku.prototype.testExports = {
-		'getRow' : getRow,
-		'getColumn' : getColumn,
-		'getBox' : getBox,
-		'isSolved' : isSolved,
-		'isValidBoard': isValidBoard
+		'getRow': getRow,
+		'getColumn': getColumn,
+		'getBox': getBox,
+		'isSolved': isSolved,
+		'isValidBoard': isValidBoard,
+		'cells': cells
 	};
 
 
@@ -240,11 +241,14 @@
 		var args = Array.prototype.slice.call( arguments, 0 );
 
 		// This is where the magic happens.
-		cells[ row - 1 ][ column - 1 ].value = value;
+		cells[ row ][ column ].value = value;
 
 		// Inform our subscribers.
 		this.emit( 'cellchanged', args.concat( previousValue ) );
 
+		if ( isSolved() ) {
+			this.emit( 'solved', null );
+		}
 		// // State change.
 		// commandManager.add( {
 		// 	context: this,
@@ -260,7 +264,11 @@
 	};
 
 	Sudoku.prototype.getCell = function ( row, column ) {
-		return cells[ row  ][ column  ].value;
+		return cells[ row ][ column ].value;
+	};
+
+	Sudoku.prototype.getBoardSize = function () {
+		return boardSize;
 	};
 
 	return this;
