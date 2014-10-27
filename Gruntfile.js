@@ -70,11 +70,11 @@ module.exports = function ( grunt ) {
 		pagespeed: {
 		  options: {
 		    nokey: true,
-		    url: "http://shabonkerz.github.io/"
+		    url: 'http://shabonkerz.github.io/'
 		  },
 		  prod: {
 		    options: {
-		      url: "http://shabonkerz.github.io/",
+		      url: 'http://shabonkerz.github.io/',
 		      locale: "en_US",
 		      strategy: "desktop",
 		      threshold: 80
