@@ -46,7 +46,7 @@ If there were more hours in the day:
 - CDN sources would be preferred over self-hosted libraries.
 - Boards could be randomly generated.
 - Pressing particular elements would generate visual feedback(e.g. Buttons would appear pressed.)
-- The implementation of detecting a solved board would be rewritten to ones with more than one solution.
+- The implementation of detecting a solved board would be rewritten to detect ones with more than one solution.
 - Users would be able to get a hint to get unstuck in the midst of the game.
 - Marking/annotating capabilities would be implemented for users with screens large enough.
 - It would have a more pleasing color scheme/aesthetic.
