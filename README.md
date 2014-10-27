@@ -27,7 +27,7 @@ Structure
 
 Overall, the most structured portion of the app itself is certainly the javascript. 
 
-**Sudoku.js**:  Decoupled from everything except EventEmitter, which essential adds what is considered native to most programming languages: Events. 
+**Sudoku.js**:  Decoupled from everything except EventEmitter, which essentially adds what is considered native to most programming languages: Events. 
 
 **CommandManager.js**: Implements the Command Pattern.
 
