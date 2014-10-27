@@ -8,7 +8,6 @@
 	// since requireJS, AMD, etc are a tad more involved and time is limited.
 	if ( typeof exports.EventEmitter === 'undefined' ) {
 		throw Error( 'Sudoku: Dependency EventEmitter not found.' );
-		return;
 	}
 
 
@@ -75,7 +74,6 @@
 			boardSize ) {
 			throw Error( 'Board size incorrect: Expected ' + boardSize + 'x' +
 				boardSize + ', but instead got ' + answerBoard.length );
-			return;
 		}
 
 		// Convert strings to an array of ints.
@@ -104,9 +102,8 @@
 		// Do some sanity checks.
 		if ( this.isValidBoard() !== true ) {
 			throw Error( 'Supplied board is invalid.' );
-			return;
 		}
-	}
+	};
 
 	// Validating and verifying the solution is simpler if box, row, and column
 	// arrays are flattened and grouped.
@@ -126,7 +123,7 @@
 		}
 
 		return groups;
-	}
+	};
 
 	Sudoku.prototype.isValidBoard = function () {
 
@@ -137,25 +134,25 @@
 			for ( var cell = 0; cell < groups[ group ].length; cell++ ) {
 
 				// For readability.
-				var cell = groups[ group ][ cell ];
+				var a = groups[ group ][ cell ];
 
 				// Not necessary to use a hashtable here, since we have the indexes already.
 				var usedNumbers = [];
 
 				// If the cell is empty, or not an acceptable number, or the number already appeared,
 				// then the board is not valid.
-				if ( cell.answer === null || /[1-9]+/.test( cell.answer ) === false ||
-					typeof usedNumbers[ cell.answer ] !== 'undefined' ) {
+				if ( a.answer === null || /[1-9]+/.test( a.answer ) === false ||
+					typeof usedNumbers[ a.answer ] !== 'undefined' ) {
 					return false;
 				}
 
 				// Mark the number as used.
-				usedNumbers[ cell.answer ] = true;
+				usedNumbers[ a.answer ] = true;
 			}
 		}
 
 		return true;
-	}
+	};
 
 	Sudoku.prototype.isSolved = function () {
 
@@ -174,7 +171,7 @@
 		}
 
 		return true;
-	}
+	};
 
 	Sudoku.prototype.getBox = function ( box ) {
 		var boxCells = [];
@@ -190,11 +187,11 @@
 		}
 
 		return boxCells;
-	}
+	};
 
 	Sudoku.prototype.getRow = function ( row ) {
 		return this.cells[ row ];
-	}
+	};
 
 	Sudoku.prototype.getColumn = function ( column ) {
 		var columnCells = [];
@@ -205,7 +202,7 @@
 
 		return columnCells;
 
-	}
+	};
 
 	// Revealing module pattern/module pattern typically does NOT attach to the
 	// object's prototype, however, there could potentially be multiple instances of

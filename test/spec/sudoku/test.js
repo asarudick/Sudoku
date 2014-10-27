@@ -85,7 +85,7 @@
 
 				for ( var i = 0; i < boardSize; i++ ) {
 					for ( var j = 0; j < boardSize; j++ ) {
-						sudoku.setCell( i, j, sudoku.cells[ i ][ j ].answer )
+						sudoku.setCell( i, j, sudoku.cells[ i ][ j ].answer );
 					}
 				}
 				return expect( sudoku.isSolved() )
@@ -98,7 +98,7 @@
 
 				var triggered = false;
 
-				sudoku.on( 'cellchanged', function ( args ) {
+				sudoku.on( 'cellchanged', function ( ) {
 					triggered = true;
 				} );
 
@@ -114,7 +114,7 @@
 
 				var triggered = false;
 
-				sudoku.on( 'cellchanged', function ( args ) {
+				sudoku.on( 'cellchanged', function ( ) {
 					triggered = true;
 				} );
 
@@ -130,7 +130,7 @@
 
 				var triggered = false;
 
-				sudoku.on( 'solved', function ( args ) {
+				sudoku.on( 'solved', function ( ) {
 					triggered = true;
 				} );
 
@@ -146,7 +146,7 @@
 
 				var triggered = false;
 
-				sudoku.on( 'solved', function ( args ) {
+				sudoku.on( 'solved', function ( ) {
 					triggered = true;
 				} );
 

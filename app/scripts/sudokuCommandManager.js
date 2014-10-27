@@ -11,12 +11,10 @@
 
 	if ( typeof exports.Sudoku === 'undefined' ) {
 		throw Error( 'SudokuCommandManager: Dependency Sudoku not found.' );
-		return;
 	}
 
 	if ( typeof exports.CommandManager === 'undefined' ) {
 		throw Error( 'SudokuCommandManager: Dependency CommandManager not found.' );
-		return;
 	}
 
 	/**
@@ -34,7 +32,7 @@
 	{
 		var previousValue = this.sudoku.getCell(row, column);
 
-		this.sudoku.setCell.apply(this.sudoku, arguments);
+		this.sudoku.setCell( row, column, value );
 
 		// State change.
 		this.commandManager.add( {
@@ -48,7 +46,7 @@
 				args: [row, column, previousValue]
 			}
 		} );
-	}
+	};
 
 
 })(this);
