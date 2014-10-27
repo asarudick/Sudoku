@@ -67,7 +67,20 @@ module.exports = function ( grunt ) {
 				]
 			}
 		},
-
+		pagespeed: {
+		  options: {
+		    nokey: true,
+		    url: "http://shabonkerz.github.io/"
+		  },
+		  prod: {
+		    options: {
+		      url: "http://shabonkerz.github.io/",
+		      locale: "en_US",
+		      strategy: "desktop",
+		      threshold: 80
+		    }
+		  }
+		},
 		// The actual grunt server settings
 		connect: {
 			options: {

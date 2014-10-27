@@ -42,7 +42,12 @@
 	/**
 	 * 			Initialization.
 	 */
-
+	
+	 /**
+	  * Constructor for the Sudoku object.
+	  * @param {string} board         String representing the board with the answers.
+	  * @param {string} revealedBoard String representing the revealed portion of the board.
+	  */
 	function Sudoku( board, revealedBoard ) {
 
 		// The Sudoku cells themselves. Each element should be an object with
@@ -67,6 +72,13 @@
 	/**
 	* 			Public methods.
 	*/
+
+
+	/**
+	 * Initializes the sudoku board, and verifies that it is worth initializing.
+	 * @param  {Array} answerBoard   The board with ALL the answers.
+	 * @param  {Array} revealedBoard The board with only some of the answers.
+	 */
 	Sudoku.prototype.initializeBoard = function ( answerBoard, revealedBoard ) {
 
 		// TODO: Support varying board sizes.
@@ -107,6 +119,11 @@
 
 	// Validating and verifying the solution is simpler if box, row, and column
 	// arrays are flattened and grouped.
+	
+	/**
+	 * Retrieves all the rows, columns, and boxes.
+	 * @return {Array} All the rows, columns, and boxes.
+	 */
 	Sudoku.prototype.getCellGroups = function () {
 		var groups = [];
 
@@ -125,6 +142,10 @@
 		return groups;
 	};
 
+	/**
+	 * Determines whether or not the current board is valid.
+	 * @return {Boolean} Indication of validity.
+	 */
 	Sudoku.prototype.isValidBoard = function () {
 
 		var groups = this.getCellGroups();
@@ -154,6 +175,10 @@
 		return true;
 	};
 
+	/**
+	 * Determines whether or not the board has been solved.
+	 * @return {Boolean} Returns true if solved.
+	 */
 	Sudoku.prototype.isSolved = function () {
 
 		var groups = this.getCellGroups();
@@ -173,6 +198,11 @@
 		return true;
 	};
 
+	/**
+	 * Retrieves a sudoku box/square.
+	 * @param  {int} 	box 	The index of the box. Ranges from 0-8.
+	 * @return {Array}     		The cells within the box.
+	 */
 	Sudoku.prototype.getBox = function ( box ) {
 		var boxCells = [];
 
@@ -189,10 +219,20 @@
 		return boxCells;
 	};
 
+	/**
+	 * Retrieves a row on the board.
+	 * @param  {int} 	row 	Row index.
+	 * @return {Array}     		The cells in the row.
+	 */
 	Sudoku.prototype.getRow = function ( row ) {
 		return this.cells[ row ];
 	};
 
+	/**
+	 * Retrieves the column on the board.
+	 * @param  {int} 	column 	Column index.
+	 * @return {Array}        	The cells within the column.
+	 */
 	Sudoku.prototype.getColumn = function ( column ) {
 		var columnCells = [];
 
@@ -207,6 +247,13 @@
 	// Revealing module pattern/module pattern typically does NOT attach to the
 	// object's prototype, however, there could potentially be multiple instances of
 	// Sudoku, so for performance reasons we'll do exactly that.
+	
+	/**
+	 * Sets the specified cell to the specified value.
+	 * @param {int} 	row    Row index.
+	 * @param {column} 	column Column index.
+	 * @param {mixed} 	value  The value to set the cell to.
+	 */
 	Sudoku.prototype.setCell = function ( row, column, value ) {
 		var previousValue = this.getCell( row, column );
 
@@ -214,9 +261,6 @@
 		if ( previousValue === value ) {
 			return;
 		}
-
-		// Your run of the mill i-need-arguments-with-array-functionality.
-		var args = Array.prototype.slice.call( arguments, 0 );
 
 		// This is where the magic happens.
 		this.cells[ row ][ column ].value = value;
@@ -229,10 +273,20 @@
 		}
 	};
 
+	/**
+	 * Retrieves the current value in the cell.
+	 * @param  {int} 	row    	Row index.
+	 * @param  {int} 	column 	Column index.
+	 * @return {mixed}        	Cell value.
+	 */
 	Sudoku.prototype.getCell = function ( row, column ) {
 		return this.cells[ row ][ column ].value;
 	};
 
+	/**
+	 * Retrieves the current board size. (It's width and height.)
+	 * @return {int} The board's height or width.
+	 */
 	Sudoku.prototype.getBoardSize = function () {
 		return boardSize;
 	};

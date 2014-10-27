@@ -1,0 +1,285 @@
+.sudoku
+{
+	width: 100%;
+}
+
+.row {
+	width: 100%;
+	height: (100 / 9) * 1%;
+}
+
+.cell {
+	height: 100%;
+	width: (100 / 9) * 0.94%;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	background-color: #F3F3F3;
+	color: #777;
+	margin-left: 0.1em;
+	margin-top: 0.1em;
+	font-weight: bold;
+	line-height: 38px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.solved-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	width: 100%;
+	float: left;
+	height: 100%;
+	background-color: rgba(0,0,0,0.4);
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+	line-height: 22em;
+	visibility: hidden;
+}
+
+// .undo-button, .redo-button
+// {
+// 	cursor: pointer;
+// 	font-size: 1em;
+// 	color: #FFF;
+// 	background-color: #CCC;
+// 	border-radius: 1em;
+// 	width: 10em;
+// 	height: 2em;
+// 	line-height: 2em;
+// 	text-align: center;
+// }
+//
+// .undo-button
+// {
+// 	float: left;
+// 	margin-top: 25%;
+// }
+// .redo-button
+// {
+// 	float: left;
+// 	margin-bottom: 25%;
+// }
+
+// 320px(iPhone3GS)
+@media only screen and (min-width: 320px) and (orientation: portrait) {
+
+	.board
+	{
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		height: 320px;
+	}
+}
+
+@media only screen and (min-width: 320px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 60%;
+		height: 240px;
+	}
+	.cell
+	{
+		line-height: 30px;
+	}
+	.solvedoverlay {
+		line-height: 17em;
+	}
+}
+
+// 320px
+@media only screen and (min-width: 384px) and (orientation: portrait) {
+
+	.board
+	{
+		width: 100%;
+		height: 320px;
+	}
+}
+
+@media only screen and (min-width: 568px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 50%;
+		height: 280px;
+	}
+	.cell
+	{
+		line-height: 34px;
+	}
+	.solvedoverlay {
+		line-height: 20em;
+	}
+}
+
+@media only screen and (min-width: 640px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 50%;
+		height: 320px;
+	}
+}
+@media only screen and (min-width: 667px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 50%;
+		height: 320px;
+	}
+	.cell
+	{
+		line-height: 38px;
+	}
+	.solvedoverlay {
+		line-height: 22em;
+	}
+}
+
+@media only screen and (min-height: 716px) and (orientation: portrait) {
+
+	.board
+	{
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		height: 360px;
+	}
+	.cell
+	{
+		line-height: 42px;
+	}
+	.solvedoverlay {
+		line-height: 25em;
+	}
+}
+
+// 992px
+@media only screen and (min-width: 992px) and (orientation: landscape) {
+	.board
+	{
+		width: 60%;
+		height: 540px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2em    ;
+	}
+	.solvedoverlay {
+		line-height: 18em;
+		font-size: 2em;
+	}
+}
+@media only screen and (min-width: 600px) and (min-height: 1024px) and (orientation: portrait) {
+	.board
+	{
+		width: 100%;
+		height: 540px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2em    ;
+	}
+	.solvedoverlay {
+		line-height: 18em;
+		font-size: 2em;
+	}
+}
+// Nexus 7
+@media only screen and (min-width: 960px) and (min-height: 600px) and (orientation: landscape) {
+	.board
+	{
+		width: 65%;
+		height: 560px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2.1em;
+	}
+	.solvedoverlay {
+		line-height: 19em;
+		font-size: 2em;
+	}
+}
+@media only screen and (min-width: 600px) and (min-height: 960px) and (orientation: portrait) {
+	.board
+	{
+		width: 100%;
+		height: 560px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2.1em;
+	}
+	.solvedoverlay {
+		line-height: 19em;
+		font-size: 2em;
+	}
+}
+
+// Nexus 10
+@media only screen and (min-width: 1200px) and (min-height: 800px) and (orientation: landscape) {
+	.board
+	{
+		width: 50%;
+		height: 600px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2.3em;
+	}
+	.solvedoverlay {
+		line-height: 20em;
+		font-size: 2em;
+	}
+}
+@media only screen and (min-width: 800px) and (min-height: 1200px) and (orientation: portrait) {
+	.board
+	{
+		width: 100%;
+		height: 680px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2.5em;
+	}
+	.solvedoverlay {
+		line-height: 22em;
+		font-size: 2em;
+	}
+}
+
+// Notebooks/Desktop
+@media only screen and (min-width: 1384px) and (orientation: landscape) {
+	.board
+	{
+		width: 50%;
+		height: 740px;
+		font-size: 2em;
+	}
+	.cell
+	{
+		line-height: 2.5em;
+	}
+	.solvedoverlay {
+		line-height: 24em;
+		font-size: 2em;
+	}
+}

@@ -17,10 +17,22 @@
 		throw Error( 'SudokuCommandManager: Dependency CommandManager not found.' );
 	}
 
+
+
+
+
+
+
 	/**
 	* 			Initialization.
 	*/
 
+	/**
+	 * Bridge/Integrator object that provides a one-stop shop for all functionality that intersects CommandManager and Sudoku, 
+	 * which isn't a whole lot, admittedly.
+	 * @param {Sudoku} 			sudoku         The sudoku object.
+	 * @param {CommandManager} 	commandManager The CommandManager instance to consume.
+	 */
 	function SudokuCommandManager( sudoku, commandManager ) {
 		this.sudoku = sudoku;
 		this.commandManager = commandManager;
@@ -28,6 +40,12 @@
 
 	exports.SudokuCommandManager = SudokuCommandManager;
 
+	/**
+	 * Sets the specified cell, and adds the command to the commandManager.
+	 * @param {int} 	row    Row index.
+	 * @param {int} 	column Column index.
+	 * @param {mixed} 	value  The value to set it to.
+	 */
 	SudokuCommandManager.prototype.setCell = function( row, column, value )
 	{
 		var previousValue = this.sudoku.getCell(row, column);
