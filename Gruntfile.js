@@ -179,13 +179,20 @@ module.exports = function ( grunt ) {
 			}
 		},
 
-		jade: {
-			compile: {
-				files: {
-					'.tmp/': [ '<%= config.app %>/templates/*.jade' ]
-				}
-			}
-		},
+		// jade: {
+		// 	compile: {
+		// 		options: {
+		// 			pretty: true,
+        //
+		// 		},
+		// 		files: [ {
+		// 			src: "app/templates/*.jade",
+		// 			dest: ".tmp/",
+		// 			expand: true,
+		// 			ext: ".html"
+		// 		} ]
+		// 	}
+		// },
 
 		// Add vendor prefixed styles
 		autoprefixer: {
@@ -432,6 +439,7 @@ module.exports = function ( grunt ) {
 	grunt.registerTask( 'build', [
 		'clean:dist',
 		'wiredep',
+		'sass',
 		'useminPrepare',
 		'concurrent:dist',
 		'autoprefixer',

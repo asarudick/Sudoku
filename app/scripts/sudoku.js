@@ -222,7 +222,7 @@
 		this.cells[ row ][ column ].value = value;
 
 		// Inform our subscribers.
-		this.emit( 'cellchanged', args.concat( previousValue ) );
+		this.emit( 'cellchanged', row, column, value, previousValue );
 
 		if ( this.isSolved() ) {
 			this.emit( 'solved', null );
