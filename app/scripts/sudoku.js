@@ -21,13 +21,8 @@
 	 *  		Private members.
 	 */
 
-	// The Sudoku cells themselves. Each element should be an object with
-	// { value: ([1-9]{1}|null) answer: [1-9] }
-	var cells = [
-		[]
-	];
 
-	// Typically, sudoku is arranged on a 9x9 board, but let's not hard-code it.
+	// Typically, sudoku is arranged on a 9x9 board, but let's not completely hard-code it.
 	// TODO: Support varying board sizes.
 	var boardSize = 9;
 	var boxWidth = 3;
@@ -42,11 +37,38 @@
 
 
 
+
+
+
 	/**
-	 * 			Private methods.
+	 * 			Initialization.
 	 */
 
-	function initializeBoard( answerBoard, revealedBoard ) {
+	function Sudoku( board, revealedBoard ) {
+
+		// The Sudoku cells themselves. Each element should be an object with
+		// { value: ([1-9]{1}|null) answer: [1-9] }
+		this.cells = [
+			[]
+		];
+
+		this.initializeBoard( board, revealedBoard );
+	}
+
+	exports.Sudoku = Sudoku;
+
+	// Add EventEmitter properties to the Sudoku model. Necessary to raise events.
+	Sudoku.prototype = Object.create( exports.EventEmitter.prototype );
+
+
+
+
+
+
+	/**
+	* 			Public methods.
+	*/
+	Sudoku.prototype.initializeBoard = function ( answerBoard, revealedBoard ) {
 
 		// TODO: Support varying board sizes.
 		if ( typeof answerBoard !== 'string' || answerBoard.length !== boardSize *
@@ -67,11 +89,11 @@
 				return ( /[1-9]+/.test( a ) === true ) ? parseInt( a, 10 ) : a;
 			} );
 
-		// Place into cells.
+		// Place into this.cells.
 		for ( var row = 0; row < boardSize; row++ ) {
-			cells[ row ] = [];
+			this.cells[ row ] = [];
 			for ( var col = 0; col < boardSize; col++ ) {
-				cells[ row ][ col ] = {
+				this.cells[ row ][ col ] = {
 					value: revealedBoard[ ( boardSize * row ) + col ],
 					answer: answerBoard[ ( boardSize * row ) + col ]
 				};
@@ -80,7 +102,7 @@
 
 		// It's possible that the board supplied has some errors.
 		// Do some sanity checks.
-		if ( isValidBoard() !== true ) {
+		if ( this.isValidBoard() !== true ) {
 			throw Error( 'Supplied board is invalid.' );
 			return;
 		}
@@ -88,27 +110,27 @@
 
 	// Validating and verifying the solution is simpler if box, row, and column
 	// arrays are flattened and grouped.
-	function getCellGroups() {
+	Sudoku.prototype.getCellGroups = function () {
 		var groups = [];
 
-		for ( var row = 0; row < cells.length; row++ ) {
-			groups.push( getRow( row ) );
+		for ( var row = 0; row < this.cells.length; row++ ) {
+			groups.push( this.getRow( row ) );
 		}
 
-		for ( var column = 0; column < cells[ 0 ].length; column++ ) {
-			groups.push( getColumn( column ) );
+		for ( var column = 0; column < this.cells[ 0 ].length; column++ ) {
+			groups.push( this.getColumn( column ) );
 		}
 
 		for ( var box = 0; box < 9; box++ ) {
-			groups.push( getBox( box ) );
+			groups.push( this.getBox( box ) );
 		}
 
 		return groups;
 	}
 
-	function isValidBoard() {
+	Sudoku.prototype.isValidBoard = function () {
 
-		var groups = getCellGroups();
+		var groups = this.getCellGroups();
 
 
 		for ( var group = 0; group < groups.length; group++ ) {
@@ -135,9 +157,9 @@
 		return true;
 	}
 
-	function isSolved() {
+	Sudoku.prototype.isSolved = function () {
 
-		var groups = getCellGroups();
+		var groups = this.getCellGroups();
 
 
 		for ( var group = 0; group < groups.length; group++ ) {
@@ -154,7 +176,7 @@
 		return true;
 	}
 
-	function getBox( box ) {
+	Sudoku.prototype.getBox = function ( box ) {
 		var boxCells = [];
 
 		var boxRowStart = Math.floor( box / boxesPerRow ) * boxHeight;
@@ -163,68 +185,27 @@
 		// Iterate over every row in the box.
 		for ( var row = boxRowStart; row < boxRowStart + boxHeight; row++ ) {
 			// Select the columns on this row.
-			boxCells = boxCells.concat( cells[ row ].slice( boxColumnStart,
+			boxCells = boxCells.concat( this.cells[ row ].slice( boxColumnStart,
 				boxColumnStart + boxWidth ) );
 		}
 
 		return boxCells;
 	}
 
-	function getRow( row ) {
-		return cells[ row ];
+	Sudoku.prototype.getRow = function ( row ) {
+		return this.cells[ row ];
 	}
 
-	function getColumn( column ) {
+	Sudoku.prototype.getColumn = function ( column ) {
 		var columnCells = [];
 
-		for ( var row = 0; row < cells.length; row++ ) {
-			columnCells.push( cells[ row ][ column ] );
+		for ( var row = 0; row < this.cells.length; row++ ) {
+			columnCells.push( this.cells[ row ][ column ] );
 		}
 
 		return columnCells;
 
 	}
-
-
-	/**
-	 * 			Initialization.
-	 */
-
-	function Sudoku( board, revealedBoard ) {
-		initializeBoard( board, revealedBoard );
-	}
-
-	exports.Sudoku = Sudoku;
-
-	// Add EventEmitter properties to the Sudoku model. Necessary to raise events.
-	Sudoku.prototype = Object.create( exports.EventEmitter.prototype );
-
-
-
-
-
-
-
-	/**
-	 * 			Exposed private methods/members for testing purposes.
-	 * 			TODO: Delete after testing.
-	 */
-
-	Sudoku.prototype.testExports = {
-		'getRow': getRow,
-		'getColumn': getColumn,
-		'getBox': getBox,
-		'isSolved': isSolved,
-		'isValidBoard': isValidBoard,
-		'cells': cells
-	};
-
-
-
-
-	/**
-	 * 			Public methods.
-	 */
 
 	// Revealing module pattern/module pattern typically does NOT attach to the
 	// object's prototype, however, there could potentially be multiple instances of
@@ -241,30 +222,18 @@
 		var args = Array.prototype.slice.call( arguments, 0 );
 
 		// This is where the magic happens.
-		cells[ row ][ column ].value = value;
+		this.cells[ row ][ column ].value = value;
 
 		// Inform our subscribers.
 		this.emit( 'cellchanged', args.concat( previousValue ) );
 
-		if ( isSolved() ) {
+		if ( this.isSolved() ) {
 			this.emit( 'solved', null );
 		}
-		// // State change.
-		// commandManager.add( {
-		// 	context: this,
-		// 	execute: {
-		// 		func: this.setCell,
-		// 		args: arguments
-		// 	},
-		// 	unexecute: {
-		// 		func: this.setCell,
-		// 		args: [row, column, previousValue]
-		// 	}
-		// } );
 	};
 
 	Sudoku.prototype.getCell = function ( row, column ) {
-		return cells[ row ][ column ].value;
+		return this.cells[ row ][ column ].value;
 	};
 
 	Sudoku.prototype.getBoardSize = function () {
