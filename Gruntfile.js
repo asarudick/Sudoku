@@ -75,8 +75,8 @@ module.exports = function ( grunt ) {
 		  prod: {
 		    options: {
 		      url: 'http://shabonkerz.github.io/',
-		      locale: "en_US",
-		      strategy: "desktop",
+		      locale: 'en_US',
+		      strategy: 'desktop',
 		      threshold: 80
 		    }
 		  }
