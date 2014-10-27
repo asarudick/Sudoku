@@ -73,7 +73,7 @@ $(function() {
 	}
 
 	var solvedButton = $([
-						'<div class="solvedbutton">',
+						'<div class="solvedoverlay">',
 							'Solved!',
 						'</div>'
 						].join(''));
