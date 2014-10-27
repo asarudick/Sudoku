@@ -20,7 +20,6 @@
 	CommandManager.prototype = {
 		add: function ( command ) {
 			this.pastCommands.push( command );
-			console.log(this.pastCommands);
 		},
 		undo: function () {
 			if ( this.pastCommands.length === 0 ) {
