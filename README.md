@@ -28,9 +28,13 @@ Structure
 Overall, the most structured portion of the app itself is certainly the javascript. 
 
 **Sudoku.js**:  Decoupled from everything except EventEmitter, which essential adds what is considered native to most programming languages: Events. 
+
 **CommandManager.js**: Implements the Command Pattern.
+
 **SudokuCommandManager.js**:  As the name implies, manages the integration of functionality between CommandManager.js and Sudoku.js. 
+
 **main.js**: Integrates the above into the interface/view.
+
 
 On the Horizon
 ---
@@ -46,6 +50,8 @@ If there were more hours in the day:
 - Users would be able to get a hint to get unstuck in the midst of the game.
 - Marking/annotating capabilities would be implemented for users with screens large enough.
 - It would have a more pleasing color scheme/aesthetic.
+- There would be a better means of user input. Too many taps/clicks are involved.
+- Allow for varying sized boards, and differing difficulty levels.
 - Multi-ball!
 
 
