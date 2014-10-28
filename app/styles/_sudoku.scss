@@ -2,7 +2,11 @@
 {
 	width: 100%;
 }
-
+.board
+{
+	margin-left: auto;
+	margin-right: auto;
+}
 .row {
 	width: 100%;
 	height: (100 / 9) * 1%;
@@ -10,14 +14,14 @@
 
 .cell {
 	height: 100%;
-	width: (100 / 9) * 0.94%;
+	width: (100 / 9) * 0.92%;
 	display: inline-block;
 	float: left;
+	margin-right: 0.1em;
+	margin-bottom: 0.1em;
 	text-align: center;
 	background-color: #F3F3F3;
 	color: #777;
-	margin-left: 0.1em;
-	margin-top: 0.1em;
 	font-weight: bold;
 	line-height: 38px;
 	cursor: pointer;
@@ -45,6 +49,15 @@
 	visibility: hidden;
 }
 
+.third-row
+{
+	margin-bottom: 0.5em;
+}
+
+.third-cell
+{
+	margin-right: 0.3em;
+}
 // .undo-button, .redo-button
 // {
 // 	cursor: pointer;

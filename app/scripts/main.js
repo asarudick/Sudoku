@@ -85,12 +85,12 @@ $(function() {
 
 	// Make a row.
 	for (var row = 0; row < sudoku.getBoardSize(); row++) {
-		var boardRow = $('<div class="row"></div>');
+		var boardRow = $('<div class="row' + ((row%3 === 2) ? ' third-row' : '') + '"></div>');
 
 		// Make a column, and wire a click/touch event to it.
 		for (var column = 0; column < sudoku.getBoardSize(); column++) {
 			var val = sudoku.getCell(row,column);
-			var cell = $('<div class="cell" data-row="'+row+'" data-column="'+column+'">'+(/\s/.test(val) === true ? '&nbsp;' : val )+'</div>');
+			var cell = $('<div class="cell' + ((column%3 === 2) ? ' third-cell' : '') + '" data-row="'+row+'" data-column="'+column+'">'+(/\s/.test(val) === true ? '&nbsp;' : val )+'</div>');
 
 			cell.on('click touch', cellClickCallback);
 
