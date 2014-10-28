@@ -43,6 +43,7 @@ Unfortunately, there wasn't enough time to implement more than basic functionali
 
 If there were more hours in the day:
 - The undo/redo buttons would be in there(The functionality is actually already there, just not wired to any button.)
+- Invalid cells would be indicated in some fashion. Although, this cheapens the game a bit, and provides hints to the player. Might make this configurable.
 - CDN sources would be preferred over self-hosted libraries.
 - Boards could be randomly generated.
 - Pressing particular elements would generate visual feedback(e.g. Buttons would appear pressed.)
