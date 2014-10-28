@@ -51,7 +51,7 @@ If there were more hours in the day:
 - Users would be able to get a hint to get unstuck in the midst of the game.
 - Marking/annotating capabilities would be implemented for users with screens large enough.
 - It would have a more pleasing color scheme/aesthetic.
-- There would be a better means of user input. Too many taps/clicks are involved.
+- There would be a better means of user input. Too many taps/clicks are involved, and it's enough to justify not having undo/redo functionality.
 - Allow for varying sized boards, and differing difficulty levels.
 - Multi-ball!
 
