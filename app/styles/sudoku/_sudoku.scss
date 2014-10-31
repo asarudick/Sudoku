@@ -1,0 +1,430 @@
+.sudoku
+{
+	width: 100%;
+}
+.board
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+.row {
+	width: 100%;
+	float: left;
+}
+
+.cell {
+	height: 0;
+	padding-bottom: (100 / 9) * 0.92%;
+	width: (100 / 9) * 0.92%;
+	display: inline-block;
+	float: left;
+	margin-right: 0.1em;
+	margin-bottom: 0.1em;
+	text-align: center;
+	background-color: #F3F3F3;
+	color: #777;
+	font-weight: bold;
+	line-height: 2.1em;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.solved-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	width: 100%;
+	float: left;
+	height: 100%;
+	background-color: rgba(0,0,0,0.4);
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+	line-height: 22em;
+	visibility: hidden;
+}
+
+.third-row
+{
+	margin-bottom: 0.3em;
+}
+
+.third-cell
+{
+	margin-right: 0.3em;
+}
+// .undo-button, .redo-button
+// {
+// 	cursor: pointer;
+// 	font-size: 1em;
+// 	color: #FFF;
+// 	background-color: #CCC;
+// 	border-radius: 1em;
+// 	width: 10em;
+// 	height: 2em;
+// 	line-height: 2em;
+// 	text-align: center;
+// }
+//
+// .undo-button
+// {
+// 	float: left;
+// 	margin-top: 25%;
+// }
+// .redo-button
+// {
+// 	float: left;
+// 	margin-bottom: 25%;
+// }
+@media only screen and (orientation: portrait) {
+
+	.board
+	{
+		width: 100%;
+	}
+}
+
+
+
+/**
+ * Board landscape ratio breakpoints.
+ */
+@media only screen and (min-width: 320px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 320/480 * 100%;
+	}
+}
+
+@media only screen and (min-height: 320px) and (min-width: 533px) and (orientation: landscape){
+
+	.board
+	{
+		width: 320/533 * 100%;
+	}
+}
+@media only screen and (min-height: 320px) and (min-width: 568px) and (orientation: landscape){
+
+	.board
+	{
+		width: 320/568 * 100%;
+	}
+}
+@media only screen and (min-height: 360px) and (min-width: 640px) and (orientation: landscape){
+
+	.board
+	{
+		width: 360/640 * 100%;
+	}
+}
+@media only screen and (min-width: 640px) and (min-height: 384px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 384/640 * 100%;
+	}
+}
+@media only screen and (min-width: 736px) and (min-height: 414px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 414/736 * 100%;
+	}
+}
+@media only screen and (min-width: 854px) and (min-height: 480px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 480/854 * 100%;
+	}
+}
+@media only screen and (min-width: 960px) and (min-height: 600px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 600/960 * 100%;
+	}
+}
+@media only screen and (min-width: 966px) and (min-height: 604px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 604/966 * 100%;
+	}
+}
+@media only screen and (min-width: 1024px) and (min-height: 600px) and (orientation: landscape) {
+
+	.board
+	{
+		width: 600/1024 * 100%;
+	}
+}
+@media only screen and (min-width: 1024px) and (min-height: 768px) {
+	.board
+	{
+		width: 768/1024 * 100%;
+	}
+}
+@media only screen and (min-width: 1280px) and (min-height: 800px)  {
+
+	.board
+	{
+		width: 800/1280 * 100%;
+	}
+}
+@media only screen and (min-width: 1440px) and (min-height: 900px)  {
+
+	.board
+	{
+		width: 900/1440 * 100%;
+	}
+}
+@media only screen and (min-width: 1280px) and (min-height: 950px)  {
+
+	.board
+	{
+		width: 950/1280 * 100%;
+	}
+}
+@media only screen and (min-width: 1920px) and (min-height: 1200px)  {
+
+	.board
+	{
+		width: 1200/1920 * 100%;
+	}
+}
+@media only screen and (min-width: 2560px) and (min-height: 1600px)  {
+
+	.board
+	{
+		width: 1600/2560 * 100%;
+	}
+}
+
+
+/**
+ * Cell font size breakpoints.
+ */
+@media only screen and (min-height: 213px) {
+
+	.cell {
+		font-size: 0.65em;
+	}
+}
+@media only screen and (min-height: 320px) {
+
+	.cell {
+		font-size: 1em;
+	}
+}
+@media only screen and (min-height: 360px) {
+
+	.cell {
+		font-size: 1.17em;
+	}
+}
+@media only screen and (min-height: 375px) {
+
+	.cell {
+		font-size: 1.15em;
+	}
+}
+@media only screen and (min-height: 384px) {
+
+	.cell {
+		font-size: 1.17em;
+	}
+}
+@media only screen and (min-height: 480px) {
+
+	.cell {
+		font-size: 1em;
+	}
+}
+@media only screen and (min-height: 604px) {
+
+	.cell {
+		font-size: 1.25em;
+	}
+}
+@media only screen and (min-height: 640px) {
+
+	.cell {
+		font-size: 1.15em;
+	}
+}
+@media only screen and (min-height: 667px) {
+
+	.cell {
+		font-size: 1.2em;
+	}
+}
+@media only screen and (min-height: 736px) {
+
+	.cell {
+		font-size: 1.3em;
+	}
+}
+@media only screen and (min-height: 800px) {
+
+	.cell {
+		font-size: 2.4em;
+	}
+}
+@media only screen and (min-height: 854px) {
+
+	.cell {
+		font-size: 1.5em;
+	}
+}
+@media only screen and (min-height: 950px) {
+
+	.cell {
+		font-size: 2.8em;
+	}
+}
+@media only screen and (min-height: 960px) {
+
+	.cell {
+		font-size: 1.8em;
+	}
+}
+@media only screen and (min-height: 1024px) {
+
+	.board
+	{
+		font-size: 0.65em;
+	}
+}
+@media only screen and (min-height: 1280px) {
+
+	.cell {
+		font-size: 2.5em;
+	}
+}
+@media only screen and (min-height: 1440px) {
+
+	.cell {
+		font-size: 1.8em;
+	}
+}
+@media only screen and (min-height: 1920px) {
+
+	.cell {
+		font-size: 3.4em;
+	}
+}
+@media only screen and (min-height: 2560px) {
+
+	.cell {
+		font-size: 3.4em;
+	}
+}
+
+
+
+
+
+
+
+/**
+ * Special cases.
+ */
+@media only screen and (min-width: 854px) and (min-height: 480px) {
+
+	.board
+	{
+		font-size: 1.5em;
+	}
+}
+@media only screen and (min-width: 960px) and (min-height: 600px) {
+
+	.board
+	{
+		font-size: 1.8em;
+	}
+}
+@media only screen and (min-width: 966px) and (min-height: 604px) {
+
+	.board
+	{
+		font-size: 1.5em;
+	}
+}
+@media only screen and (min-height: 1024px) and (min-width: 600px) {
+
+	.board
+	{
+		font-size: 1em;
+	}
+}
+@media only screen and (min-width: 1024px) and (min-height: 600px) {
+
+	.board
+	{
+		font-size: 1.8em;
+	}
+}
+@media only screen and (min-width: 768px) and (min-height: 1024px) {
+
+	.board
+	{
+		font-size: 0.85em;
+	}
+}
+@media only screen and (min-width: 1024px) and (min-height: 768px) {
+
+	.board
+	{
+		font-size: 1.8em;
+	}
+}
+@media only screen and (min-width: 1280px) and (min-height: 800px) {
+
+	.board
+	{
+		font-size: 1em;
+	}
+}
+@media only screen and (min-height: 1280px) and (min-width: 720px)  {
+
+	.board
+	{
+		font-size: 0.90em;
+	}
+}
+@media only screen and (min-height: 1280px) and (min-width: 950px)  {
+
+	.board
+	{
+		font-size: 1.15em;
+	}
+}
+@media only screen and (min-width: 1440px) and (min-height: 900px) {
+
+	.board
+	{
+		font-size: 1.9em;
+	}
+}
+@media only screen and (min-width: 1920px) and (min-height: 1200px) {
+
+	.board
+	{
+		font-size: 1.4em;
+	}
+}
+@media only screen and (min-width: 2560px) and (min-height: 1600px) {
+
+	.board
+	{
+		font-size: 2.7em;
+	}
+}
