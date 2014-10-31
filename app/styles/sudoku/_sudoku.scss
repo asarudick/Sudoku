@@ -193,6 +193,13 @@
 		width: 950/1280 * 100%;
 	}
 }
+@media only screen and (min-width: 1600px) and (min-height: 800px)  {
+
+	.board
+	{
+		width: 860/1600 * 100%;
+	}
+}
 @media only screen and (min-width: 1920px) and (min-height: 1200px)  {
 
 	.board
@@ -205,6 +212,13 @@
 	.board
 	{
 		width: 1600/2560 * 100%;
+	}
+}
+@media only screen and (min-width: 1920px) and (min-height: 900px)  {
+
+	.board
+	{
+		width: 1000/1920 * 100%;
 	}
 }
 
@@ -414,6 +428,13 @@
 		font-size: 1.9em;
 	}
 }
+@media only screen and (min-width: 1600px) and (min-height: 900px) {
+
+	.board
+	{
+		font-size: 1.9em;
+	}
+}
 @media only screen and (min-width: 1920px) and (min-height: 1200px) {
 
 	.board
@@ -426,5 +447,12 @@
 	.board
 	{
 		font-size: 2.7em;
+	}
+}
+@media only screen and (min-width: 1920px) and (min-height: 900px)  {
+
+	.board
+	{
+		font-size: 1.7em;
 	}
 }
