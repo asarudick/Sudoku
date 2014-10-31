@@ -42,7 +42,7 @@
 	/**
 	 * 			Initialization.
 	 */
-	
+
 	 /**
 	  * Constructor for the Sudoku object.
 	  * @param {string} board         String representing the board with the answers.
@@ -104,6 +104,7 @@
 			this.cells[ row ] = [];
 			for ( var col = 0; col < boardSize; col++ ) {
 				this.cells[ row ][ col ] = {
+					editable: revealedBoard[ ( boardSize * row ) + col ] === ' ',
 					value: revealedBoard[ ( boardSize * row ) + col ],
 					answer: answerBoard[ ( boardSize * row ) + col ]
 				};
@@ -119,7 +120,7 @@
 
 	// Validating and verifying the solution is simpler if box, row, and column
 	// arrays are flattened and grouped.
-	
+
 	/**
 	 * Retrieves all the rows, columns, and boxes.
 	 * @return {Array} All the rows, columns, and boxes.
@@ -247,7 +248,7 @@
 	// Revealing module pattern/module pattern typically does NOT attach to the
 	// object's prototype, however, there could potentially be multiple instances of
 	// Sudoku, so for performance reasons we'll do exactly that.
-	
+
 	/**
 	 * Sets the specified cell to the specified value.
 	 * @param {int} 	row    Row index.
@@ -255,7 +256,15 @@
 	 * @param {mixed} 	value  The value to set the cell to.
 	 */
 	Sudoku.prototype.setCell = function ( row, column, value ) {
-		var previousValue = this.getCell( row, column );
+		var cell = this.getCell( row, column );
+		
+		// You can't edit this!
+		if( cell.editable === false )
+		{
+			return;
+		}
+
+		var previousValue = cell.value;
 
 		// No change? Why bother doing anything?
 		if ( previousValue === value ) {
@@ -280,7 +289,7 @@
 	 * @return {mixed}        	Cell value.
 	 */
 	Sudoku.prototype.getCell = function ( row, column ) {
-		return this.cells[ row ][ column ].value;
+		return this.cells[ row ][ column ];
 	};
 
 	/**

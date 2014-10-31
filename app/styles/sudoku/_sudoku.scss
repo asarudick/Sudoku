@@ -21,7 +21,7 @@
 	margin-right: 0.1em;
 	margin-bottom: 0.1em;
 	text-align: center;
-	background-color: #F3F3F3;
+	background-color:  #F3F3F3;
 	color: #777;
 	font-weight: bold;
 	line-height: 2.1em;
@@ -32,6 +32,9 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+.cell.editable {
+	background-color: ghostwhite;
 }
 
 .solved-overlay {

@@ -61,8 +61,8 @@ $(function() {
 
 
 	// Set up undo/redo functionality.
-	var commandManager = new CommandManager();
-	var sudokuCommandManager = new SudokuCommandManager(sudoku, commandManager);
+	// var commandManager = new CommandManager();
+	// var sudokuCommandManager = new SudokuCommandManager(sudoku, commandManager);
 
 
 
@@ -76,8 +76,8 @@ $(function() {
 	var cellClickCallback = function(){
 		var cellRow = parseInt($(this).attr('data-row'),10);
 		var cellColumn = parseInt($(this).attr('data-column'),10);
-		var currentValue = sudoku.getCell(cellRow, cellColumn);
-		sudokuCommandManager.setCell( cellRow, cellColumn, currentValue === ' ' ? 1 : (currentValue % 9) + 1);
+		var currentValue = sudoku.getCell(cellRow, cellColumn).value;
+		sudoku.setCell( cellRow, cellColumn, currentValue === ' ' ? 1 : (currentValue % 9) + 1);
 	};
 
 	// Assemble the fragments.
@@ -89,12 +89,14 @@ $(function() {
 
 		// Make a column, and wire a click/touch event to it.
 		for (var column = 0; column < sudoku.getBoardSize(); column++) {
-			var val = sudoku.getCell(row,column);
-			var cell = $('<div class="cell' + ((column%3 === 2) ? ' third-cell' : '') + '" data-row="'+row+'" data-column="'+column+'">'+(/\s/.test(val) === true ? '&nbsp;' : val )+'</div>');
+			var cell = sudoku.getCell(row,column);
 
-			cell.on('click touch', cellClickCallback);
+			// TODO: Make this readable.
+			var element = $('<div class="cell' + ((column%3 === 2) ? ' third-cell' : '') + (cell.editable === true ? ' editable': '') + '" data-row="'+row+'" data-column="'+column+'">'+(/\s/.test(cell.value) === true ? '&nbsp;' : cell.value )+'</div>');
 
-			cell.appendTo(boardRow);
+			element.on('click touch', cellClickCallback);
+
+			element.appendTo(boardRow);
 		}
 
 		boardRow.appendTo(boardFragment);
