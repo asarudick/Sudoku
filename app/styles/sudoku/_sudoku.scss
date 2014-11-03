@@ -196,6 +196,13 @@
 		width: 950/1280 * 100%;
 	}
 }
+@media only screen and (min-width: 1600px) and (min-height: 700px)  {
+
+	.board
+	{
+		width: 800/1600 * 100%;
+	}
+}
 @media only screen and (min-width: 1600px) and (min-height: 800px)  {
 
 	.board
